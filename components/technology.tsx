@@ -28,7 +28,7 @@ const technologies = [
 
 export default function Technology() {
   return (
-    <section id="technology" className="py-20 px-4 sm:px-6 lg:px-8 bg-background">
+    <section id="technology" className="py-20 px-4 sm:px-6 lg:px-8 bg-black">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
           <p className="text-sm font-medium text-primary mb-2 tracking-widest uppercase">Tech Stack</p>
@@ -51,7 +51,7 @@ export default function Technology() {
                 <img
                   src={tech.src}
                   alt={tech.alt}
-                  className="h-8 w-fit opacity-60 hover:opacity-100 transition-opacity duration-300 dark:brightness-0 dark:invert"
+                  className="h-8 w-fit opacity-60 hover:opacity-100 transition-opacity duration-300"
                   loading="lazy"
                 />
               </div>
@@ -63,7 +63,7 @@ export default function Technology() {
                 <img
                   src={tech.src}
                   alt={tech.alt}
-                  className="h-8 w-fit opacity-60 hover:opacity-100 transition-opacity duration-300 dark:brightness-0 dark:invert"
+                  className="h-8 w-fit opacity-60 hover:opacity-100 transition-opacity duration-300"
                   loading="lazy"
                 />
               </div>

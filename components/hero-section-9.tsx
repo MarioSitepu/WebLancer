@@ -1,11 +1,14 @@
 "use client"
 
 import * as React from "react"
+import { useEffect, useMemo, useState } from "react"
+import { motion } from "framer-motion"
 import { cn } from '@/lib/utils'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { Menu, X } from 'lucide-react'
+import { SparklesCore } from '@/components/ui/sparkles'
 
 const menuItems = [
     { name: 'Features', href: '#' },
@@ -16,12 +19,29 @@ const menuItems = [
 
 export const HeroSection = () => {
     const [menuState, setMenuState] = React.useState(false)
+    const [titleNumber, setTitleNumber] = useState(0)
+    const titles = useMemo(
+        () => ["menarik", "modern", "profesional", "unik", "kreatif"],
+        []
+    )
+
+    useEffect(() => {
+        const timeoutId = setTimeout(() => {
+            if (titleNumber === titles.length - 1) {
+                setTitleNumber(0)
+            } else {
+                setTitleNumber(titleNumber + 1)
+            }
+        }, 2000)
+        return () => clearTimeout(timeoutId)
+    }, [titleNumber, titles])
+
     return (
         <div>
             <header>
                 <nav
                     data-state={menuState && 'active'}
-                    className="group fixed z-20 w-full border-b border-dashed bg-white backdrop-blur md:relative dark:bg-zinc-950/50 lg:dark:bg-transparent">
+                    className="group fixed z-20 w-full border-b border-dashed bg-black/80 backdrop-blur md:relative lg:bg-transparent">
                     <div className="m-auto max-w-5xl px-6">
                         <div className="flex flex-wrap items-center justify-between gap-6 py-3 lg:gap-0 lg:py-4">
                             <div className="flex w-full justify-between lg:w-auto">
@@ -41,7 +61,7 @@ export const HeroSection = () => {
                                 </button>
                             </div>
 
-                            <div className="bg-background group-data-[state=active]:block lg:group-data-[state=active]:flex mb-6 hidden w-full flex-wrap items-center justify-end space-y-8 rounded-3xl border p-6 shadow-2xl shadow-zinc-300/20 md:flex-nowrap lg:m-0 lg:flex lg:w-fit lg:gap-6 lg:space-y-0 lg:border-transparent lg:bg-transparent lg:p-0 lg:shadow-none dark:shadow-none dark:lg:bg-transparent">
+                            <div className="bg-background group-data-[state=active]:block lg:group-data-[state=active]:flex mb-6 hidden w-full flex-wrap items-center justify-end space-y-8 rounded-3xl border border-border p-6 shadow-2xl shadow-black/50 md:flex-nowrap lg:m-0 lg:flex lg:w-fit lg:gap-6 lg:space-y-0 lg:border-transparent lg:bg-transparent lg:p-0 lg:shadow-none">
                                 <div className="lg:pr-4">
                                     <ul className="space-y-6 text-base lg:flex lg:gap-8 lg:space-y-0 lg:text-sm">
                                         {menuItems.map((item, index) => (
@@ -82,16 +102,56 @@ export const HeroSection = () => {
             <main>
                 <div
                     aria-hidden
-                    className="z-2 absolute inset-0 pointer-events-none isolate opacity-50 contain-strict hidden lg:block">
-                    <div className="w-140 h-320 -translate-y-87.5 absolute left-0 top-0 -rotate-45 rounded-full bg-[radial-gradient(68.54%_68.72%_at_55.02%_31.46%,hsla(0,0%,85%,.08)_0,hsla(0,0%,55%,.02)_50%,hsla(0,0%,45%,0)_80%)]" />
-                    <div className="h-320 absolute left-0 top-0 w-56 -rotate-45 rounded-full bg-[radial-gradient(50%_50%_at_50%_50%,hsla(0,0%,85%,.06)_0,hsla(0,0%,45%,.02)_80%,transparent_100%)] [translate:5%_-50%]" />
-                    <div className="h-320 -translate-y-87.5 absolute left-0 top-0 w-56 -rotate-45 bg-[radial-gradient(50%_50%_at_50%_50%,hsla(0,0%,85%,.04)_0,hsla(0,0%,45%,.02)_80%,transparent_100%)]" />
+                    className="z-2 absolute inset-0 pointer-events-none isolate opacity-30 contain-strict hidden lg:block">
+                    <div className="w-140 h-320 -translate-y-87.5 absolute left-0 top-0 -rotate-45 rounded-full bg-[radial-gradient(68.54%_68.72%_at_55.02%_31.46%,hsla(0,0%,20%,.15)_0,hsla(0,0%,10%,.08)_50%,hsla(0,0%,5%,0)_80%)]" />
+                    <div className="h-320 absolute left-0 top-0 w-56 -rotate-45 rounded-full bg-[radial-gradient(50%_50%_at_50%_50%,hsla(0,0%,20%,.12)_0,hsla(0,0%,10%,.06)_80%,transparent_100%)] [translate:5%_-50%]" />
+                    <div className="h-320 -translate-y-87.5 absolute left-0 top-0 w-56 -rotate-45 bg-[radial-gradient(50%_50%_at_50%_50%,hsla(0,0%,20%,.1)_0,hsla(0,0%,10%,.05)_80%,transparent_100%)]" />
                 </div>
 
-                <section className="overflow-hidden bg-white dark:bg-transparent">
-                    <div className="relative mx-auto max-w-5xl px-6 py-28 lg:py-24">
-                        <div className="relative z-10 mx-auto max-w-2xl text-center">
-                            <h1 className="text-balance text-4xl font-semibold md:text-5xl lg:text-6xl">Modern Software testing reimagined</h1>
+                <section className="overflow-hidden bg-black relative">
+                    {/* Sparkles Background */}
+                    <div className="w-full absolute inset-0 h-full">
+                        <SparklesCore
+                            id="tsparticleshero"
+                            background="transparent"
+                            minSize={0.6}
+                            maxSize={1.4}
+                            particleDensity={100}
+                            className="w-full h-full"
+                            particleColor="#FFFFFF"
+                            speed={1}
+                        />
+                    </div>
+                    
+                    <div className="relative mx-auto max-w-5xl px-6 py-28 lg:py-24 z-10">
+                        <div className="relative z-20 mx-auto max-w-2xl text-center">
+                            <h1 className="text-balance text-4xl font-semibold md:text-5xl lg:text-6xl flex flex-wrap items-center justify-center gap-2">
+                                <span>Ingin Website yang</span>
+                                <span className="relative inline-block overflow-hidden text-center md:pb-4 md:pt-1 min-w-[200px] md:min-w-[300px] h-[1.2em]">
+                                    {titles.map((title, index) => (
+                                        <motion.span
+                                            key={index}
+                                            className="absolute left-0 right-0 font-semibold"
+                                            initial={{ opacity: 0, y: "-100" }}
+                                            transition={{ type: "spring", stiffness: 50 }}
+                                            animate={
+                                                titleNumber === index
+                                                    ? {
+                                                        y: 0,
+                                                        opacity: 1,
+                                                    }
+                                                    : {
+                                                        y: titleNumber > index ? -150 : 150,
+                                                        opacity: 0,
+                                                    }
+                                            }
+                                        >
+                                            {title}
+                                        </motion.span>
+                                    ))}
+                                </span>
+                                <span>?</span>
+                            </h1>
                             <p className="mx-auto my-8 max-w-2xl text-xl">Officiis laudantium excepturi ducimus rerum dignissimos, and tempora nam vitae, excepturi ducimus iste provident dolores.</p>
 
                             <Button
@@ -104,19 +164,12 @@ export const HeroSection = () => {
                         </div>
                     </div>
 
-                    <div className="mx-auto -mt-16 max-w-7xl mask-[linear-gradient(to_bottom,black_50%,transparent_100%)]">
+                    <div className="mx-auto -mt-16 max-w-7xl mask-[linear-gradient(to_bottom,black_50%,transparent_100%)] relative z-10">
                         <div className="perspective-distant mask-[linear-gradient(to_right,black_50%,transparent_100%)] -mr-16 pl-16 lg:-mr-56 lg:pl-56">
                             <div className="[transform:rotateX(20deg);]">
                                 <div className="lg:h-176 relative skew-x-[.36rad]">
                                     <Image
-                                        className="rounded-[--radius] z-2 relative border dark:hidden"
-                                        src="https://tailark.com/_next/image?url=%2Fcard.png&w=3840&q=75"
-                                        alt="Tailark hero section"
-                                        width={2880}
-                                        height={2074}
-                                    />
-                                    <Image
-                                        className="rounded-[--radius] z-2 relative hidden border dark:block"
+                                        className="rounded-[--radius] z-2 relative border border-border"
                                         src="https://tailark.com/_next/image?url=%2Fdark-card.webp&w=3840&q=75"
                                         alt="Tailark hero section"
                                         width={2880}
@@ -127,82 +180,82 @@ export const HeroSection = () => {
                         </div>
                     </div>
                 </section>
-                <section className="bg-background relative z-10 py-16">
+                <section className="bg-black relative z-10 py-16">
                     <div className="m-auto max-w-5xl px-6">
                         <h2 className="text-center text-lg font-medium">Your favorite companies are our partners.</h2>
                         <div className="mx-auto mt-20 flex max-w-4xl flex-wrap items-center justify-center gap-x-12 gap-y-8 sm:gap-x-16 sm:gap-y-12">
                             <Image
-                                className="h-5 w-fit dark:invert"
+                                className="h-5 w-fit invert opacity-70 hover:opacity-100 transition-opacity"
                                 src="https://html.tailus.io/blocks/customers/nvidia.svg"
                                 alt="Nvidia Logo"
                                 height={20}
                                 width={100}
                             />
                             <Image
-                                className="h-4 w-fit dark:invert"
+                                className="h-4 w-fit invert opacity-70 hover:opacity-100 transition-opacity"
                                 src="https://html.tailus.io/blocks/customers/column.svg"
                                 alt="Column Logo"
                                 height={16}
                                 width={100}
                             />
                             <Image
-                                className="h-4 w-fit dark:invert"
+                                className="h-4 w-fit invert opacity-70 hover:opacity-100 transition-opacity"
                                 src="https://html.tailus.io/blocks/customers/github.svg"
                                 alt="GitHub Logo"
                                 height={16}
                                 width={100}
                             />
                             <Image
-                                className="h-5 w-fit dark:invert"
+                                className="h-5 w-fit invert opacity-70 hover:opacity-100 transition-opacity"
                                 src="https://html.tailus.io/blocks/customers/nike.svg"
                                 alt="Nike Logo"
                                 height={20}
                                 width={100}
                             />
                             <Image
-                                className="h-4 w-fit dark:invert"
+                                className="h-4 w-fit invert opacity-70 hover:opacity-100 transition-opacity"
                                 src="https://html.tailus.io/blocks/customers/laravel.svg"
                                 alt="Laravel Logo"
                                 height={16}
                                 width={100}
                             />
                             <Image
-                                className="h-7 w-fit dark:invert"
+                                className="h-7 w-fit invert opacity-70 hover:opacity-100 transition-opacity"
                                 src="https://html.tailus.io/blocks/customers/lilly.svg"
                                 alt="Lilly Logo"
                                 height={28}
                                 width={100}
                             />
                             <Image
-                                className="h-5 w-fit dark:invert"
+                                className="h-5 w-fit invert opacity-70 hover:opacity-100 transition-opacity"
                                 src="https://html.tailus.io/blocks/customers/lemonsqueezy.svg"
                                 alt="Lemon Squeezy Logo"
                                 height={20}
                                 width={100}
                             />
                             <Image
-                                className="h-6 w-fit dark:invert"
+                                className="h-6 w-fit invert opacity-70 hover:opacity-100 transition-opacity"
                                 src="https://html.tailus.io/blocks/customers/openai.svg"
                                 alt="OpenAI Logo"
                                 height={24}
                                 width={100}
                             />
                             <Image
-                                className="h-4 w-fit dark:invert"
+                                className="h-4 w-fit invert opacity-70 hover:opacity-100 transition-opacity"
                                 src="https://html.tailus.io/blocks/customers/tailwindcss.svg"
                                 alt="Tailwind CSS Logo"
                                 height={16}
                                 width={100}
                             />
                             <Image
-                                className="h-5 w-fit dark:invert"
+                                className="h-5 w-fit invert opacity-70 hover:opacity-100 transition-opacity"
                                 src="https://html.tailus.io/blocks/customers/vercel.svg"
                                 alt="Vercel Logo"
                                 height={20}
                                 width={100}
                             />
                             <Image
-                                className="h-5 w-fit dark:invert"
+                                className="h-5 w-fit invert opacity-70 hover:opacity-100 transition-opacity"
                                 src="https://html.tailus.io/blocks/customers/zapier.svg"
                                 alt="Zapier Logo"
                                 height={20}

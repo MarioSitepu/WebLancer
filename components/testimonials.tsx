@@ -51,7 +51,7 @@ export default function Testimonials() {
   }, [])
 
   return (
-    <section id="testimonials" className="py-20 px-4 sm:px-6 lg:px-8 bg-card/50">
+    <section id="testimonials" className="py-20 px-4 sm:px-6 lg:px-8 bg-black">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
           <p className="text-sm font-medium text-primary mb-2 tracking-widest uppercase">Social Proof</p>
