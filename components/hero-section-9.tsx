@@ -9,6 +9,7 @@ import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { Menu, X } from 'lucide-react'
 import { SparklesCore } from '@/components/ui/sparkles'
+import { AnimatedGroup } from '@/components/ui/animated-group'
 
 const menuItems = [
     { name: 'Features', href: '#' },
@@ -16,6 +17,26 @@ const menuItems = [
     { name: 'Pricing', href: '#' },
     { name: 'About', href: '#' },
 ]
+
+const transitionVariants = {
+    item: {
+        hidden: {
+            opacity: 0,
+            filter: 'blur(12px)',
+            y: 12,
+        },
+        visible: {
+            opacity: 1,
+            filter: 'blur(0px)',
+            y: 0,
+            transition: {
+                type: 'spring' as const,
+                bounce: 0.3,
+                duration: 1.5,
+            },
+        },
+    },
+}
 
 export const HeroSection = () => {
     const [menuState, setMenuState] = React.useState(false)
@@ -125,60 +146,90 @@ export const HeroSection = () => {
                     
                     <div className="relative mx-auto max-w-5xl px-6 py-28 lg:py-24 z-10">
                         <div className="relative z-20 mx-auto max-w-2xl text-center">
-                            <h1 className="text-balance text-4xl font-semibold md:text-5xl lg:text-6xl flex flex-wrap items-center justify-center gap-2">
-                                <span>Ingin Website yang</span>
-                                <span className="relative inline-block overflow-hidden text-center md:pb-4 md:pt-1 min-w-[200px] md:min-w-[300px] h-[1.2em]">
-                                    {titles.map((title, index) => (
-                                        <motion.span
-                                            key={index}
-                                            className="absolute left-0 right-0 font-semibold"
-                                            initial={{ opacity: 0, y: "-100" }}
-                                            transition={{ type: "spring", stiffness: 50 }}
-                                            animate={
-                                                titleNumber === index
-                                                    ? {
-                                                        y: 0,
-                                                        opacity: 1,
-                                                    }
-                                                    : {
-                                                        y: titleNumber > index ? -150 : 150,
-                                                        opacity: 0,
-                                                    }
-                                            }
-                                        >
-                                            {title}
-                                        </motion.span>
-                                    ))}
-                                </span>
-                                <span>?</span>
-                            </h1>
-                            <p className="mx-auto my-8 max-w-2xl text-xl">Officiis laudantium excepturi ducimus rerum dignissimos, and tempora nam vitae, excepturi ducimus iste provident dolores.</p>
+                            <AnimatedGroup
+                                variants={{
+                                    container: {
+                                        visible: {
+                                            transition: {
+                                                staggerChildren: 0.05,
+                                                delayChildren: 0.75,
+                                            },
+                                        },
+                                    },
+                                    ...transitionVariants,
+                                }}
+                            >
+                                <h1 className="text-balance text-4xl font-semibold md:text-5xl lg:text-6xl flex flex-wrap items-center justify-center gap-2">
+                                    <span>Ingin Website yang</span>
+                                    <span className="relative inline-block overflow-hidden text-center md:pb-4 md:pt-1 min-w-[200px] md:min-w-[300px] h-[1.2em]">
+                                        {titles.map((title, index) => (
+                                            <motion.span
+                                                key={index}
+                                                className="absolute left-0 right-0 font-semibold"
+                                                initial={{ opacity: 0, y: "-100" }}
+                                                transition={{ type: "spring", stiffness: 50 }}
+                                                animate={
+                                                    titleNumber === index
+                                                        ? {
+                                                            y: 0,
+                                                            opacity: 1,
+                                                        }
+                                                        : {
+                                                            y: titleNumber > index ? -150 : 150,
+                                                            opacity: 0,
+                                                        }
+                                                }
+                                            >
+                                                {title}
+                                            </motion.span>
+                                        ))}
+                                    </span>
+                                    <span>?</span>
+                                </h1>
+                                <p className="mx-auto my-8 max-w-2xl text-xl">Officiis laudantium excepturi ducimus rerum dignissimos, and tempora nam vitae, excepturi ducimus iste provident dolores.</p>
 
-                            <Button
-                                asChild
-                                size="lg">
-                                <Link href="#">
-                                    <span className="btn-label">Start Building</span>
-                                </Link>
-                            </Button>
+                                <div>
+                                    <Button
+                                        asChild
+                                        size="lg">
+                                        <Link href="#">
+                                            <span className="btn-label">Start Building</span>
+                                        </Link>
+                                    </Button>
+                                </div>
+                            </AnimatedGroup>
                         </div>
                     </div>
 
-                    <div className="mx-auto -mt-16 max-w-7xl mask-[linear-gradient(to_bottom,black_50%,transparent_100%)] relative z-10">
-                        <div className="perspective-distant mask-[linear-gradient(to_right,black_50%,transparent_100%)] -mr-16 pl-16 lg:-mr-56 lg:pl-56">
-                            <div className="[transform:rotateX(20deg);]">
-                                <div className="lg:h-176 relative skew-x-[.36rad]">
-                                    <Image
-                                        className="rounded-[--radius] z-2 relative border border-border"
-                                        src="https://tailark.com/_next/image?url=%2Fdark-card.webp&w=3840&q=75"
-                                        alt="Tailark hero section"
-                                        width={2880}
-                                        height={2074}
-                                    />
+                    <AnimatedGroup
+                        variants={{
+                            container: {
+                                visible: {
+                                    transition: {
+                                        staggerChildren: 0.05,
+                                        delayChildren: 0.75,
+                                    },
+                                },
+                            },
+                            ...transitionVariants,
+                        }}
+                    >
+                        <div className="mx-auto -mt-16 max-w-7xl mask-[linear-gradient(to_bottom,black_50%,transparent_100%)] relative z-10">
+                            <div className="perspective-distant mask-[linear-gradient(to_right,black_50%,transparent_100%)] -mr-16 pl-16 lg:-mr-56 lg:pl-56">
+                                <div className="[transform:rotateX(20deg);]">
+                                    <div className="lg:h-176 relative skew-x-[.36rad]">
+                                        <Image
+                                            className="rounded-[--radius] z-2 relative border border-border"
+                                            src="https://tailark.com/_next/image?url=%2Fdark-card.webp&w=3840&q=75"
+                                            alt="Tailark hero section"
+                                            width={2880}
+                                            height={2074}
+                                        />
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </AnimatedGroup>
                 </section>
                 <section className="bg-black relative z-10 py-16">
                     <div className="m-auto max-w-5xl px-6">
