@@ -69,11 +69,11 @@ export const SparklesCore = (props: ParticlesProps) => {
               zIndex: 1,
             },
 
-            fpsLimit: 120,
+            fpsLimit: 60,
             interactivity: {
               events: {
                 onClick: {
-                  enable: true,
+                  enable: false,
                   mode: "push",
                 },
                 onHover: {
@@ -86,7 +86,7 @@ export const SparklesCore = (props: ParticlesProps) => {
               },
               modes: {
                 push: {
-                  quantity: 4,
+                  quantity: 2,
                 },
                 repulse: {
                   distance: 200,
@@ -232,7 +232,7 @@ export const SparklesCore = (props: ParticlesProps) => {
                   mode: "delete",
                   value: 0,
                 },
-                value: particleDensity || 120,
+                value: particleDensity || 60,
               },
               opacity: {
                 value: {
@@ -242,7 +242,7 @@ export const SparklesCore = (props: ParticlesProps) => {
                 animation: {
                   count: 0,
                   enable: true,
-                  speed: speed || 4,
+                  speed: speed || 2,
                   decay: 0,
                   delay: 0,
                   sync: false,

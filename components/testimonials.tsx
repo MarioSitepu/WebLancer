@@ -1,55 +1,69 @@
-"use client"
+"use client";
 
-import { useEffect, useRef, useState } from "react"
-import { Star } from "lucide-react"
+import { TestimonialsColumn } from "@/components/ui/testimonials-columns-1";
 
 const testimonials = [
   {
-    name: "Sarah Johnson",
-    role: "CEO, Tech Startup",
-    content:
-      "Exceptional work and attention to detail. The freelancer transformed our vision into reality with a beautiful, functional website that exceeded all expectations.",
-    rating: 5,
+    text: "This ERP revolutionized our operations, streamlining finance and inventory. The cloud-based platform keeps us productive, even remotely.",
+    image: "https://randomuser.me/api/portraits/women/1.jpg",
+    name: "Briana Patton",
+    role: "Operations Manager",
   },
   {
-    name: "Michael Chen",
+    text: "Implementing this ERP was smooth and quick. The customizable, user-friendly interface made team training effortless.",
+    image: "https://randomuser.me/api/portraits/men/2.jpg",
+    name: "Bilal Ahmed",
+    role: "IT Manager",
+  },
+  {
+    text: "The support team is exceptional, guiding us through setup and providing ongoing assistance, ensuring our satisfaction.",
+    image: "https://randomuser.me/api/portraits/women/3.jpg",
+    name: "Saman Malik",
+    role: "Customer Support Lead",
+  },
+  {
+    text: "This ERP's seamless integration enhanced our business operations and efficiency. Highly recommend for its intuitive interface.",
+    image: "https://randomuser.me/api/portraits/men/4.jpg",
+    name: "Omar Raza",
+    role: "CEO",
+  },
+  {
+    text: "Its robust features and quick support have transformed our workflow, making us significantly more efficient.",
+    image: "https://randomuser.me/api/portraits/women/5.jpg",
+    name: "Zainab Hussain",
+    role: "Project Manager",
+  },
+  {
+    text: "The smooth implementation exceeded expectations. It streamlined processes, improving overall business performance.",
+    image: "https://randomuser.me/api/portraits/women/6.jpg",
+    name: "Aliza Khan",
+    role: "Business Analyst",
+  },
+  {
+    text: "Our business functions improved with a user-friendly design and positive customer feedback.",
+    image: "https://randomuser.me/api/portraits/men/7.jpg",
+    name: "Farhan Siddiqui",
     role: "Marketing Director",
-    content:
-      "Professional, responsive, and incredibly talented. The design is modern and the development is solid. Highly recommended for any digital project.",
-    rating: 5,
   },
   {
-    name: "Emma Williams",
-    role: "Product Manager",
-    content:
-      "Great communication throughout the project. The final product was delivered on time and is performing beautifully. Would definitely work together again.",
-    rating: 5,
+    text: "They delivered a solution that exceeded expectations, understanding our needs and enhancing our operations.",
+    image: "https://randomuser.me/api/portraits/women/8.jpg",
+    name: "Sana Sheikh",
+    role: "Sales Manager",
   },
-]
+  {
+    text: "Using this ERP, our online presence and conversions significantly improved, boosting business performance.",
+    image: "https://randomuser.me/api/portraits/men/9.jpg",
+    name: "Hassan Ali",
+    role: "E-commerce Manager",
+  },
+];
 
-export default function Testimonials() {
-  const [visibleItems, setVisibleItems] = useState<number[]>([])
-  const sectionRef = useRef<HTMLDivElement>(null)
+const firstColumn = testimonials.slice(0, 3);
+const secondColumn = testimonials.slice(3, 6);
+const thirdColumn = testimonials.slice(6, 9);
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const index = Number.parseInt(entry.target.getAttribute("data-index") || "0", 10)
-            setVisibleItems((prev) => [...new Set([...prev, index])])
-          }
-        })
-      },
-      { threshold: 0.2 },
-    )
-
-    const items = sectionRef.current?.querySelectorAll("[data-index]")
-    items?.forEach((item) => observer.observe(item))
-
-    return () => observer.disconnect()
-  }, [])
-
+const Testimonials = () => {
   return (
     <section id="testimonials" className="py-20 px-4 sm:px-6 lg:px-8 bg-black">
       <div className="max-w-6xl mx-auto">
@@ -60,38 +74,14 @@ export default function Testimonials() {
             What my clients say about working together
           </p>
         </div>
-
-        <div ref={sectionRef} className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {testimonials.map((testimonial, index) => (
-            <div
-              key={index}
-              data-index={index}
-              className={`p-8 border border-border rounded-lg bg-background hover:border-primary transition-all duration-500 transform hover:-translate-y-2 ${
-                visibleItems.includes(index) ? "opacity-100" : "opacity-0"
-              }`}
-              style={{
-                animation: visibleItems.includes(index) ? `fadeIn 0.8s ease-out ${index * 0.1}s forwards` : "none",
-              }}
-            >
-              {/* Rating */}
-              <div className="flex gap-1 mb-4">
-                {Array.from({ length: testimonial.rating }).map((_, i) => (
-                  <Star key={i} size={16} className="fill-primary text-primary" />
-                ))}
-              </div>
-
-              {/* Quote */}
-              <p className="text-muted-foreground mb-6 leading-relaxed italic">&ldquo;{testimonial.content}&rdquo;</p>
-
-              {/* Author */}
-              <div>
-                <p className="font-semibold text-foreground">{testimonial.name}</p>
-                <p className="text-sm text-muted-foreground">{testimonial.role}</p>
-              </div>
-            </div>
-          ))}
+        <div className="flex justify-center gap-6 mt-10 mask-[linear-gradient(to_bottom,transparent,black_25%,black_75%,transparent)] max-h-[740px] overflow-hidden">
+          <TestimonialsColumn testimonials={firstColumn} duration={15} />
+          <TestimonialsColumn testimonials={secondColumn} className="hidden md:block" duration={19} />
+          <TestimonialsColumn testimonials={thirdColumn} className="hidden lg:block" duration={17} />
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
+
+export default Testimonials;

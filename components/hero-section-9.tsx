@@ -22,17 +22,15 @@ const transitionVariants = {
     item: {
         hidden: {
             opacity: 0,
-            filter: 'blur(12px)',
             y: 12,
         },
         visible: {
             opacity: 1,
-            filter: 'blur(0px)',
             y: 0,
             transition: {
                 type: 'spring' as const,
                 bounce: 0.3,
-                duration: 1.5,
+                duration: 0.8,
             },
         },
     },
@@ -137,7 +135,7 @@ export const HeroSection = () => {
                             background="transparent"
                             minSize={0.6}
                             maxSize={1.4}
-                            particleDensity={100}
+                            particleDensity={50}
                             className="w-full h-full"
                             particleColor="#FFFFFF"
                             speed={1}
@@ -188,12 +186,20 @@ export const HeroSection = () => {
                                 </h1>
                                 <p className="mx-auto my-8 max-w-2xl text-xl">Officiis laudantium excepturi ducimus rerum dignissimos, and tempora nam vitae, excepturi ducimus iste provident dolores.</p>
 
-                                <div>
+                                <div className="flex items-center justify-center gap-4 flex-wrap">
                                     <Button
                                         asChild
                                         size="lg">
                                         <Link href="#">
                                             <span className="btn-label">Start Building</span>
+                                        </Link>
+                                    </Button>
+                                    <Button
+                                        asChild
+                                        size="lg"
+                                        variant="outline">
+                                        <Link href="#contact">
+                                            <span className="btn-label">Kontak Kami</span>
                                         </Link>
                                     </Button>
                                 </div>
@@ -220,10 +226,12 @@ export const HeroSection = () => {
                                     <div className="lg:h-176 relative skew-x-[.36rad]">
                                         <Image
                                             className="rounded-[--radius] z-2 relative border border-border"
-                                            src="https://tailark.com/_next/image?url=%2Fdark-card.webp&w=3840&q=75"
+                                            src="https://tailark.com/_next/image?url=%2Fdark-card.webp&w=1920&q=75"
                                             alt="Tailark hero section"
-                                            width={2880}
-                                            height={2074}
+                                            width={1920}
+                                            height={1384}
+                                            loading="lazy"
+                                            priority={false}
                                         />
                                     </div>
                                 </div>

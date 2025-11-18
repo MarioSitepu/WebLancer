@@ -1,89 +1,127 @@
-"use client"
+"use client";
 
-import { useEffect, useRef, useState } from "react"
-import { Code, Palette, Smartphone, Zap } from "lucide-react"
+import React from "react";
+import { cn } from "@/lib/utils";
+import {
+  Code,
+  Zap,
+  DollarSign,
+  Cloud,
+  Network,
+  Headphones,
+  Settings,
+  Heart,
+} from "lucide-react";
 
-const services = [
-  {
-    icon: Code,
-    title: "Web Development",
-    description: "Modern, scalable web applications built with cutting-edge technologies and best practices.",
-  },
-  {
-    icon: Palette,
-    title: "UI/UX Design",
-    description: "Beautiful, intuitive interfaces designed with user experience and accessibility in mind.",
-  },
-  {
-    icon: Smartphone,
-    title: "Responsive Design",
-    description: "Perfect performance across all devices. Mobile-first approach for optimal user experience.",
-  },
-  {
-    icon: Zap,
-    title: "Performance",
-    description: "Lightning-fast websites optimized for speed, SEO, and user engagement metrics.",
-  },
-]
-
-export default function Services() {
-  const [visibleItems, setVisibleItems] = useState<number[]>([])
-  const sectionRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const index = Number.parseInt(entry.target.getAttribute("data-index") || "0", 10)
-            setVisibleItems((prev) => [...new Set([...prev, index])])
-          }
-        })
-      },
-      { threshold: 0.1 },
-    )
-
-    const items = sectionRef.current?.querySelectorAll("[data-index]")
-    items?.forEach((item) => observer.observe(item))
-
-    return () => observer.disconnect()
-  }, [])
-
+function FeaturesSectionWithHoverEffects() {
+  const features = [
+    {
+      title: "Built for developers",
+      description:
+        "Built for engineers, developers, dreamers, thinkers and doers.",
+      icon: <Code className="w-6 h-6" />,
+    },
+    {
+      title: "Ease of use",
+      description:
+        "It's as easy as using an Apple, and as expensive as buying one.",
+      icon: <Zap className="w-6 h-6" />,
+    },
+    {
+      title: "Pricing like no other",
+      description:
+        "Our prices are best in the market. No cap, no lock, no credit card required.",
+      icon: <DollarSign className="w-6 h-6" />,
+    },
+    {
+      title: "100% Uptime guarantee",
+      description: "We just cannot be taken down by anyone.",
+      icon: <Cloud className="w-6 h-6" />,
+    },
+    {
+      title: "Multi-tenant Architecture",
+      description: "You can simply share passwords instead of buying new seats",
+      icon: <Network className="w-6 h-6" />,
+    },
+    {
+      title: "24/7 Customer Support",
+      description:
+        "We are available a 100% of the time. Atleast our AI Agents are.",
+      icon: <Headphones className="w-6 h-6" />,
+    },
+    {
+      title: "Money back guarantee",
+      description:
+        "If you donot like EveryAI, we will convince you to like us.",
+      icon: <Settings className="w-6 h-6" />,
+    },
+    {
+      title: "And everything else",
+      description: "I just ran out of copy ideas. Accept my sincere apologies",
+      icon: <Heart className="w-6 h-6" />,
+    },
+  ];
   return (
-    <section id="services" className="py-20 px-4 sm:px-6 lg:px-8 bg-black">
-      <div className="max-w-6xl mx-auto">
+    <section id="services" className="w-full py-20 bg-black">
+      <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
-          <p className="text-sm font-medium text-primary mb-2 tracking-widest uppercase">What I Offer</p>
-          <h2 className="text-4xl sm:text-5xl font-bold text-foreground mb-4 text-balance">Services & Expertise</h2>
+          <p className="text-sm font-medium text-primary mb-2 tracking-widest uppercase">Our Services</p>
+          <h2 className="text-4xl sm:text-5xl font-bold text-foreground mb-4 text-balance">What We Offer</h2>
           <p className="text-muted-foreground max-w-2xl mx-auto text-balance">
-            Comprehensive digital solutions tailored to your business needs and goals
+            Comprehensive solutions tailored to meet your business needs and drive success
           </p>
         </div>
-
-        <div ref={sectionRef} className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {services.map((service, index) => {
-            const Icon = service.icon
-            const isVisible = visibleItems.includes(index)
-
-            return (
-              <div
-                key={index}
-                data-index={index}
-                className={`p-8 border border-border rounded-lg group hover:border-primary transition-all duration-500 transform hover:-translate-y-2 hover:shadow-lg ${
-                  isVisible ? "opacity-100" : "opacity-0"
-                }`}
-                style={{
-                  animation: isVisible ? `fadeIn 0.8s ease-out ${index * 0.1}s forwards` : "none",
-                }}
-              >
-                <Icon className="w-12 h-12 text-primary mb-4 group-hover:scale-110 transition-transform duration-300" />
-                <h3 className="text-xl font-semibold text-foreground mb-2">{service.title}</h3>
-                <p className="text-muted-foreground leading-relaxed">{service.description}</p>
-              </div>
-            )
-          })}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 relative z-10">
+          {features.map((feature, index) => (
+            <Feature key={feature.title} {...feature} index={index} />
+          ))}
         </div>
       </div>
     </section>
-  )
+  );
+}
+
+const Feature = ({
+  title,
+  description,
+  icon,
+  index,
+}: {
+  title: string;
+  description: string;
+  icon: React.ReactNode;
+  index: number;
+}) => {
+  return (
+    <div
+      className={cn(
+        "flex flex-col lg:border-r py-10 relative group/feature border-neutral-800",
+        (index === 0 || index === 4) && "lg:border-l border-neutral-800",
+        index < 4 && "lg:border-b border-neutral-800"
+      )}
+    >
+      {index < 4 && (
+        <div className="opacity-0 group-hover/feature:opacity-100 transition duration-200 absolute inset-0 h-full w-full bg-linear-to-t from-neutral-100 dark:from-neutral-800 to-transparent pointer-events-none" />
+      )}
+      {index >= 4 && (
+        <div className="opacity-0 group-hover/feature:opacity-100 transition duration-200 absolute inset-0 h-full w-full bg-linear-to-b from-neutral-100 dark:from-neutral-800 to-transparent pointer-events-none" />
+      )}
+      <div className="mb-4 relative z-10 px-10 text-neutral-600 dark:text-neutral-400">
+        {icon}
+      </div>
+      <div className="text-lg font-bold mb-2 relative z-10 px-10">
+        <div className="absolute left-0 inset-y-0 h-6 group-hover/feature:h-8 w-1 rounded-tr-full rounded-br-full bg-neutral-300 dark:bg-neutral-700 group-hover/feature:bg-blue-500 transition-all duration-200 origin-center" />
+        <span className="group-hover/feature:translate-x-2 transition duration-200 inline-block text-neutral-800 dark:text-neutral-100">
+          {title}
+        </span>
+      </div>
+      <p className="text-sm text-neutral-600 dark:text-neutral-300 max-w-xs relative z-10 px-10">
+        {description}
+      </p>
+    </div>
+  );
+};
+
+export default function Services() {
+  return <FeaturesSectionWithHoverEffects />;
 }
