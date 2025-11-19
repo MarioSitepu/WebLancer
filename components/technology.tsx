@@ -1,5 +1,7 @@
 "use client"
 
+import { LogoLoop } from "@/components/ui/logo-loop";
+
 const technologies = [
   { src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg', alt: 'React' },
   { src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg', alt: 'Next.js' },
@@ -38,37 +40,18 @@ export default function Technology() {
           </p>
         </div>
 
-        <div className="relative overflow-hidden">
-          {/* Gradient masks */}
-          <div className="absolute left-0 top-0 z-10 h-full w-20 bg-linear-to-r from-background to-transparent" />
-          <div className="absolute right-0 top-0 z-10 h-full w-20 bg-linear-to-l from-background to-transparent" />
-          
-          {/* Carousel container */}
-          <div className="flex animate-scroll gap-x-12 sm:gap-x-16">
-            {/* First set */}
-            {technologies.map((tech, idx) => (
-              <div key={`first-${idx}`} className="shrink-0 flex items-center">
-                <img
-                  src={tech.src}
-                  alt={tech.alt}
-                  className="h-8 w-fit opacity-60 hover:opacity-100 transition-opacity duration-300"
-                  loading="lazy"
-                />
-              </div>
-            ))}
-            
-            {/* Duplicate set for seamless loop */}
-            {technologies.map((tech, idx) => (
-              <div key={`second-${idx}`} className="shrink-0 flex items-center">
-                <img
-                  src={tech.src}
-                  alt={tech.alt}
-                  className="h-8 w-fit opacity-60 hover:opacity-100 transition-opacity duration-300"
-                  loading="lazy"
-                />
-              </div>
-            ))}
-          </div>
+        <div className="relative">
+          <LogoLoop
+            logos={technologies}
+            speed={120}
+            direction="left"
+            logoHeight={32}
+            gap={48}
+            pauseOnHover={true}
+            fadeOut={true}
+            scaleOnHover={true}
+            ariaLabel="Technology logos"
+          />
         </div>
       </div>
     </section>

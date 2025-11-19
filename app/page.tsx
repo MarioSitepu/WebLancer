@@ -1,4 +1,5 @@
 import { HeroSection } from '@/components/hero-section-9'
+import OrderNow from '@/components/ordernow'
 import Services from '@/components/services'
 import Technology from '@/components/technology'
 import Portfolio from '@/components/portofolio'
@@ -8,6 +9,7 @@ export default function Home() {
   return (
     <div>
       <HeroSection />
+      <OrderNow />
       <Services />
       <Technology />
       <Portfolio />
