@@ -17,6 +17,7 @@ interface StepperProps extends HTMLAttributes<HTMLDivElement> {
   backButtonText?: string;
   nextButtonText?: string;
   disableStepIndicators?: boolean;
+  canNavigateToStep?: (step: number) => boolean;
   renderStepIndicator?: (props: {
     step: number;
     currentStep: number;
@@ -38,6 +39,7 @@ export default function Stepper({
   backButtonText = 'Back',
   nextButtonText = 'Continue',
   disableStepIndicators = false,
+  canNavigateToStep,
   renderStepIndicator,
   ...rest
 }: StepperProps) {
@@ -49,6 +51,10 @@ export default function Stepper({
   const isLastStep = currentStep === totalSteps;
 
   const updateStep = (newStep: number) => {
+    // Check if navigation is allowed
+    if (canNavigateToStep && !canNavigateToStep(newStep)) {
+      return;
+    }
     setCurrentStep(newStep);
     if (newStep > totalSteps) {
       onFinalStepCompleted();
@@ -66,8 +72,12 @@ export default function Stepper({
 
   const handleNext = () => {
     if (!isLastStep) {
+      const nextStep = currentStep + 1;
+      if (canNavigateToStep && !canNavigateToStep(nextStep)) {
+        return;
+      }
       setDirection(1);
-      updateStep(currentStep + 1);
+      updateStep(nextStep);
     }
   };
 
@@ -78,11 +88,11 @@ export default function Stepper({
 
   return (
     <div
-      className="flex min-h-full flex-1 flex-col items-center justify-center pt-0 pb-4 px-4 sm:aspect-4/3 md:aspect-2/1"
+      className="flex flex-col items-center justify-start w-full pt-0 pb-4 px-4"
       {...rest}
     >
       <div
-        className={`mx-auto w-full max-w-md rounded-lg border border-border bg-card shadow-lg ${stepCircleContainerClassName}`}
+        className={`mx-auto w-full max-w-md rounded-lg border border-border bg-card shadow-lg overflow-visible ${stepCircleContainerClassName}`}
       >
         <div className={`${stepContainerClassName} flex w-full items-center p-8`}>
           {stepsArray.map((_, index) => {
@@ -104,6 +114,7 @@ export default function Stepper({
                     step={stepNumber}
                     disableStepIndicators={disableStepIndicators}
                     currentStep={currentStep}
+                    canNavigateToStep={canNavigateToStep}
                     onClickStep={clicked => {
                       setDirection(clicked > currentStep ? 1 : -1);
                       updateStep(clicked);
@@ -120,7 +131,7 @@ export default function Stepper({
           isCompleted={isCompleted}
           currentStep={currentStep}
           direction={direction}
-          className={`space-y-2 px-8 ${contentClassName}`}
+          className={`space-y-2 px-8 min-h-0 ${contentClassName}`}
         >
           {stepsArray[currentStep - 1]}
         </StepContentWrapper>
@@ -174,20 +185,20 @@ function StepContentWrapper({
   const [parentHeight, setParentHeight] = useState<number>(0);
 
   return (
-    <motion.div
-      style={{ position: 'relative', overflow: 'hidden' }}
-      animate={{ height: isCompleted ? 0 : parentHeight }}
-      transition={{ type: 'spring', duration: 0.4 }}
+    <div
+      style={{ position: 'relative', minHeight: parentHeight || 'auto' }}
       className={className}
     >
-      <AnimatePresence initial={false} mode="sync" custom={direction}>
+      <AnimatePresence initial={false} mode="wait" custom={direction}>
         {!isCompleted && (
-          <SlideTransition key={currentStep} direction={direction} onHeightReady={h => setParentHeight(h)}>
+          <SlideTransition key={currentStep} direction={direction} onHeightReady={h => {
+            if (h > 0) setParentHeight(h);
+          }}>
             {children}
           </SlideTransition>
         )}
       </AnimatePresence>
-    </motion.div>
+    </div>
   );
 }
 
@@ -201,9 +212,27 @@ function SlideTransition({ children, direction, onHeightReady }: SlideTransition
   const containerRef = useRef<HTMLDivElement | null>(null);
 
   useLayoutEffect(() => {
+    const updateHeight = () => {
+      if (containerRef.current) {
+        const height = containerRef.current.offsetHeight;
+        onHeightReady(height);
+      }
+    };
+    
+    updateHeight();
+    
+    // Update height when window resizes or content changes
+    const resizeObserver = new ResizeObserver(() => {
+      updateHeight();
+    });
+    
     if (containerRef.current) {
-      onHeightReady(containerRef.current.offsetHeight);
+      resizeObserver.observe(containerRef.current);
     }
+    
+    return () => {
+      resizeObserver.disconnect();
+    };
   }, [children, onHeightReady]);
 
   return (
@@ -215,7 +244,7 @@ function SlideTransition({ children, direction, onHeightReady }: SlideTransition
       animate="center"
       exit="exit"
       transition={{ duration: 0.4 }}
-      style={{ position: 'absolute', left: 0, right: 0, top: 0 }}
+      style={{ position: 'relative', width: '100%' }}
     >
       {children}
     </motion.div>
@@ -242,7 +271,7 @@ interface StepProps {
 }
 
 export function Step({ children }: StepProps) {
-  return <div className="px-8">{children}</div>;
+  return <div className="px-0">{children}</div>;
 }
 
 interface StepIndicatorProps {
@@ -252,20 +281,47 @@ interface StepIndicatorProps {
   disableStepIndicators?: boolean;
 }
 
-function StepIndicator({ step, currentStep, onClickStep, disableStepIndicators = false }: StepIndicatorProps) {
+interface StepIndicatorProps {
+  step: number;
+  currentStep: number;
+  onClickStep: (clicked: number) => void;
+  disableStepIndicators?: boolean;
+  canNavigateToStep?: (step: number) => boolean;
+}
+
+function StepIndicator({ step, currentStep, onClickStep, disableStepIndicators = false, canNavigateToStep }: StepIndicatorProps) {
   const status = currentStep === step ? 'active' : currentStep < step ? 'inactive' : 'complete';
+  const canNavigate = canNavigateToStep ? canNavigateToStep(step) : true;
+  const isDisabled = step > currentStep && !canNavigate;
+  const [shake, setShake] = useState(false);
 
   const handleClick = () => {
-    if (step !== currentStep && !disableStepIndicators) {
+    if (step !== currentStep && !disableStepIndicators && canNavigate) {
       onClickStep(step);
+    } else if (isDisabled) {
+      // Trigger shake animation
+      setShake(true);
+      setTimeout(() => setShake(false), 500);
     }
   };
 
   return (
     <motion.div
       onClick={handleClick}
-      className="relative cursor-pointer outline-none focus:outline-none"
-      animate={status}
+      className={`relative outline-none focus:outline-none ${
+        isDisabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'
+      }`}
+      animate={
+        shake
+          ? {
+              x: [0, -10, 10, -10, 10, 0],
+              transition: {
+                duration: 0.5,
+                ease: "easeInOut"
+              }
+            }
+          : status
+      }
       initial={false}
     >
       <motion.div
