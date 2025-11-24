@@ -33,10 +33,10 @@ export default function Technology() {
     <section id="technology" className="py-20 px-4 sm:px-6 lg:px-8 bg-black">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
-          <p className="text-sm font-medium text-primary mb-2 tracking-widest uppercase">Tech Stack</p>
-          <h2 className="text-4xl sm:text-5xl font-bold text-foreground mb-4 text-balance">Technology I Used</h2>
+          <p className="text-sm font-medium text-primary mb-2 tracking-widest uppercase">Teknologi</p>
+          <h2 className="text-4xl sm:text-5xl font-bold text-foreground mb-4 text-balance">Teknologi yang Kami Gunakan</h2>
           <p className="text-muted-foreground max-w-2xl mx-auto text-balance">
-            Modern tools and technologies I use to build exceptional digital experiences
+            Kami menggunakan teknologi modern dan terdepan untuk menghasilkan website dan aplikasi berkualitas tinggi
           </p>
         </div>
 

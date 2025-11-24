@@ -6,40 +6,40 @@ import { ArrowLeft, ArrowRight, ExternalLink } from "lucide-react"
 const projects = [
   {
     id: "ecommerce",
-    title: "E-Commerce Platform",
-    description: "Full-stack e-commerce solution with payment integration and inventory management.",
+    title: "Website E-Commerce",
+    description: "Joki pembuatan website toko online dengan integrasi payment gateway dan manajemen produk.",
     tags: ["React", "Node.js", "PostgreSQL"],
     image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80",
     href: "#",
   },
   {
     id: "portfolio",
-    title: "Portfolio Website",
-    description: "Clean, minimalist portfolio showcasing creative work with smooth animations.",
+    title: "Website Portfolio",
+    description: "Joki website portfolio dengan desain modern dan animasi yang menarik untuk showcase karya.",
     tags: ["Next.js", "Tailwind CSS", "Animation"],
     image: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=800&q=80",
     href: "#",
   },
   {
     id: "dashboard",
-    title: "SaaS Dashboard",
-    description: "Analytics dashboard with real-time data visualization and user management.",
+    title: "Dashboard Admin",
+    description: "Joki pembuatan dashboard admin dengan visualisasi data real-time dan manajemen user.",
     tags: ["React", "TypeScript", "Charts"],
     image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80",
     href: "#",
   },
   {
     id: "mobile",
-    title: "Mobile App Design",
-    description: "User-friendly mobile application interface with intuitive navigation patterns.",
-    tags: ["Mobile Design", "UI/UX", "Prototyping"],
+    title: "Aplikasi Mobile",
+    description: "Joki aplikasi mobile dengan UI/UX yang user-friendly dan navigasi yang intuitif.",
+    tags: ["Flutter", "React Native", "UI/UX"],
     image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&q=80",
     href: "#",
   },
   {
     id: "landing",
-    title: "Modern Landing Page",
-    description: "High-converting landing page with compelling design and optimized performance.",
+    title: "Landing Page",
+    description: "Joki landing page dengan desain menarik, performa optimal, dan SEO friendly.",
     tags: ["Next.js", "Tailwind CSS", "SEO"],
     image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80",
     href: "#",
@@ -129,12 +129,12 @@ export default function Portfolio() {
     <section id="portfolio" className="py-16 md:py-20 bg-black">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12 md:mb-16">
-          <p className="text-sm font-medium text-primary mb-2 tracking-widest uppercase">Selected Work</p>
+          <p className="text-sm font-medium text-primary mb-2 tracking-widest uppercase">Portfolio</p>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-4 text-balance">
-            Featured Projects
+            Proyek yang Telah Kami Selesaikan
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto text-balance">
-            A selection of recent projects that showcase my skills and approach to design and development
+            Beberapa contoh proyek joki website dan aplikasi yang telah kami kerjakan dengan hasil memuaskan
           </p>
         </div>
 

@@ -23,38 +23,38 @@ interface Feature197Props {
 const defaultFeatures: FeatureItem[] = [
   {
     id: 1,
-    title: "Ready-to-Use UI Blocks",
+    title: "Harga Terjangkau",
     image: "https://shadcnblocks.com/images/block/placeholder-1.svg",
     description:
-      "Browse through our extensive collection of pre-built UI blocks designed with shadcn/ui. Each block is carefully crafted to be responsive, accessible, and easily customizable. Simply copy and paste the code into your project.",
+      "Layanan joki web dengan harga murah mulai dari 100rb. Cocok untuk berbagai kebutuhan mulai dari tugas kuliah, proyek UMKM, hingga website profesional. Kami memberikan harga terbaik tanpa mengorbankan kualitas.",
   },
   {
     id: 2,
-    title: "Tailwind CSS & TypeScript",
+    title: "Pengerjaan Cepat",
     image: "https://shadcnblocks.com/images/block/placeholder-2.svg",
     description:
-      "Built with Tailwind CSS for rapid styling and TypeScript for type safety. Our blocks leverage the full power of Tailwind's utility classes while maintaining clean, type-safe code that integrates seamlessly with your Next.js projects.",
+      "Tim kami siap mengerjakan proyekmu dengan cepat dan tepat waktu. Bahkan untuk deadline yang ketat, kami bisa menyelesaikannya tanpa mengorbankan kualitas hasil. Update progress rutin selama pengerjaan.",
   },
   {
     id: 3,
-    title: "Dark Mode & Customization",
+    title: "Kualitas Profesional",
     image: "https://shadcnblocks.com/images/block/placeholder-3.svg",
     description:
-      "Every block supports dark mode out of the box and can be customized to match your brand. Modify colors, spacing, and typography using Tailwind's configuration. The shadcn/ui theming system makes it easy to maintain consistency across your site.",
+      "Meskipun harga terjangkau, kami tetap memberikan kualitas profesional. Kode yang rapi, dokumentasi lengkap, dan hasil yang sesuai dengan kebutuhanmu. Setiap proyek dikerjakan dengan standar tinggi.",
   },
   {
     id: 4,
-    title: "Accessibility First",
+    title: "Garansi Revisi",
     image: "https://shadcnblocks.com/images/block/placeholder-4.svg",
     description:
-      "All blocks are built with accessibility in mind, following WCAG guidelines. They include proper ARIA labels, keyboard navigation support, and semantic HTML structure. Ensure your website is usable by everyone without extra effort.",
+      "Kami memberikan garansi revisi gratis hingga hasil sesuai dengan kebutuhanmu. Tidak perlu khawatir jika ada yang perlu disesuaikan, kami siap membantu hingga kamu puas dengan hasilnya.",
   },
   {
     id: 5,
-    title: "Modern Development Stack",
+    title: "Support 24/7",
     image: "https://shadcnblocks.com/images/block/placeholder-5.svg",
     description:
-      "Built for modern web development with React 18, Next.js 14, and the latest shadcn/ui components. Take advantage of React Server Components, TypeScript strict mode, and other cutting-edge features while maintaining excellent performance.",
+      "Tim support kami siap membantu kapan saja. Konsultasi gratis sebelum order, diskusi selama pengerjaan, dan support setelah proyek selesai. Kami selalu siap menjawab pertanyaanmu.",
   },
 ];
 
@@ -76,12 +76,12 @@ const Feature197 = ({ features = defaultFeatures }: Feature197Props) => {
     <section className="w-full py-16 md:py-20 bg-black border-t border-neutral-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12 md:mb-16">
-          <p className="text-sm font-medium text-primary mb-2 tracking-widest uppercase">Features</p>
+          <p className="text-sm font-medium text-primary mb-2 tracking-widest uppercase">Keunggulan</p>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-4 text-balance">
-            Why Choose Us
+            Mengapa Pilih Joki Web Kami
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto text-balance text-sm sm:text-base">
-            Discover what makes our platform unique and powerful
+            Keunggulan layanan joki web murah kami yang membuat kami berbeda dari yang lain
           </p>
         </div>
         
@@ -171,38 +171,38 @@ export default function Footer() {
     features: [
       {
         id: 1,
-        title: "Ready-to-Use UI Blocks",
+        title: "Harga Terjangkau",
         image: "https://shadcnblocks.com/images/block/placeholder-1.svg",
         description:
-          "Browse through our extensive collection of pre-built UI blocks designed with shadcn/ui. Each block is carefully crafted to be responsive, accessible, and easily customizable. Simply copy and paste the code into your project.",
+          "Layanan joki web dengan harga murah mulai dari 100rb. Cocok untuk berbagai kebutuhan mulai dari tugas kuliah, proyek UMKM, hingga website profesional. Kami memberikan harga terbaik tanpa mengorbankan kualitas.",
       },
       {
         id: 2,
-        title: "Tailwind CSS & TypeScript",
+        title: "Pengerjaan Cepat",
         image: "https://shadcnblocks.com/images/block/placeholder-2.svg",
         description:
-          "Built with Tailwind CSS for rapid styling and TypeScript for type safety. Our blocks leverage the full power of Tailwind's utility classes while maintaining clean, type-safe code that integrates seamlessly with your Next.js projects.",
+          "Tim kami siap mengerjakan proyekmu dengan cepat dan tepat waktu. Bahkan untuk deadline yang ketat, kami bisa menyelesaikannya tanpa mengorbankan kualitas hasil. Update progress rutin selama pengerjaan.",
       },
       {
         id: 3,
-        title: "Dark Mode & Customization",
+        title: "Kualitas Profesional",
         image: "https://shadcnblocks.com/images/block/placeholder-3.svg",
         description:
-          "Every block supports dark mode out of the box and can be customized to match your brand. Modify colors, spacing, and typography using Tailwind's configuration. The shadcn/ui theming system makes it easy to maintain consistency across your site.",
+          "Meskipun harga terjangkau, kami tetap memberikan kualitas profesional. Kode yang rapi, dokumentasi lengkap, dan hasil yang sesuai dengan kebutuhanmu. Setiap proyek dikerjakan dengan standar tinggi.",
       },
       {
         id: 4,
-        title: "Accessibility First",
+        title: "Garansi Revisi",
         image: "https://shadcnblocks.com/images/block/placeholder-4.svg",
         description:
-          "All blocks are built with accessibility in mind, following WCAG guidelines. They include proper ARIA labels, keyboard navigation support, and semantic HTML structure. Ensure your website is usable by everyone without extra effort.",
+          "Kami memberikan garansi revisi gratis hingga hasil sesuai dengan kebutuhanmu. Tidak perlu khawatir jika ada yang perlu disesuaikan, kami siap membantu hingga kamu puas dengan hasilnya.",
       },
       {
         id: 5,
-        title: "Modern Development Stack",
+        title: "Support 24/7",
         image: "https://shadcnblocks.com/images/block/placeholder-5.svg",
         description:
-          "Built for modern web development with React 18, Next.js 14, and the latest shadcn/ui components. Take advantage of React Server Components, TypeScript strict mode, and other cutting-edge features while maintaining excellent performance.",
+          "Tim support kami siap membantu kapan saja. Konsultasi gratis sebelum order, diskusi selama pengerjaan, dan support setelah proyek selesai. Kami selalu siap menjawab pertanyaanmu.",
       },
     ],
   };

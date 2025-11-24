@@ -16,48 +16,48 @@ import {
 function FeaturesSectionWithHoverEffects() {
   const features = [
     {
-      title: "Built for developers",
+      title: "Joki Website",
       description:
-        "Built for engineers, developers, dreamers, thinkers and doers.",
+        "Layanan joki pembuatan website mulai dari landing page, company profile, hingga website custom dengan harga terjangkau.",
       icon: <Code className="w-6 h-6" />,
     },
     {
-      title: "Ease of use",
+      title: "Joki Aplikasi",
       description:
-        "It's as easy as using an Apple, and as expensive as buying one.",
+        "Joki pembuatan aplikasi web dan mobile dengan teknologi terbaru. Fast delivery, hasil berkualitas.",
       icon: <Zap className="w-6 h-6" />,
     },
     {
-      title: "Pricing like no other",
+      title: "Harga Terjangkau",
       description:
-        "Our prices are best in the market. No cap, no lock, no credit card required.",
+        "Harga joki web murah mulai dari 100rb. Cocok untuk tugas kuliah, proyek UMKM, hingga website profesional.",
       icon: <DollarSign className="w-6 h-6" />,
     },
     {
-      title: "100% Uptime guarantee",
-      description: "We just cannot be taken down by anyone.",
+      title: "Garansi Revisi",
+      description: "Garansi revisi gratis hingga sesuai dengan kebutuhanmu. Kami pastikan hasil memuaskan.",
       icon: <Cloud className="w-6 h-6" />,
     },
     {
-      title: "Multi-tenant Architecture",
-      description: "You can simply share passwords instead of buying new seats",
+      title: "Joki Tugas Kuliah",
+      description: "Khusus untuk tugas kuliah, tubes, dan skripsi. Kami bantu selesaikan dengan cepat dan tepat waktu.",
       icon: <Network className="w-6 h-6" />,
     },
     {
-      title: "24/7 Customer Support",
+      title: "Support 24/7",
       description:
-        "We are available a 100% of the time. Atleast our AI Agents are.",
+        "Tim support siap membantu kapan saja. Konsultasi gratis sebelum order, diskusi selama pengerjaan.",
       icon: <Headphones className="w-6 h-6" />,
     },
     {
-      title: "Money back guarantee",
+      title: "Pengerjaan Cepat",
       description:
-        "If you donot like EveryAI, we will convince you to like us.",
+        "Deadline ketat? Kami bisa selesaikan dengan cepat tanpa mengorbankan kualitas hasil.",
       icon: <Settings className="w-6 h-6" />,
     },
     {
-      title: "And everything else",
-      description: "I just ran out of copy ideas. Accept my sincere apologies",
+      title: "Berbagai Teknologi",
+      description: "Mendukung berbagai teknologi: React, Next.js, Laravel, Flutter, dan masih banyak lagi.",
       icon: <Heart className="w-6 h-6" />,
     },
   ];
@@ -65,10 +65,10 @@ function FeaturesSectionWithHoverEffects() {
     <section id="services" className="w-full py-20 bg-black">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
-          <p className="text-sm font-medium text-primary mb-2 tracking-widest uppercase">Our Services</p>
-          <h2 className="text-4xl sm:text-5xl font-bold text-foreground mb-4 text-balance">What We Offer</h2>
+          <p className="text-sm font-medium text-primary mb-2 tracking-widest uppercase">Layanan Kami</p>
+          <h2 className="text-4xl sm:text-5xl font-bold text-foreground mb-4 text-balance">Joki Web Murah & Berkualitas</h2>
           <p className="text-muted-foreground max-w-2xl mx-auto text-balance">
-            Comprehensive solutions tailored to meet your business needs and drive success
+            Solusi joki website dan aplikasi dengan harga terjangkau untuk berbagai kebutuhan proyekmu
           </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 relative z-10">

@@ -12,10 +12,10 @@ import { SparklesCore } from '@/components/ui/sparkles'
 import { AnimatedGroup } from '@/components/ui/animated-group'
 
 const menuItems = [
-    { name: 'Features', href: '#' },
-    { name: 'Solution', href: '#' },
-    { name: 'Pricing', href: '#' },
-    { name: 'About', href: '#' },
+    { name: 'Layanan', href: '#services' },
+    { name: 'Portfolio', href: '#portfolio' },
+    { name: 'Testimoni', href: '#testimonials' },
+    { name: 'Tentang', href: '#' },
 ]
 
 const transitionVariants = {
@@ -36,24 +36,45 @@ const transitionVariants = {
     },
 }
 
+// Memisahkan SparklesBackground ke component terpisah agar tidak re-render
+const SparklesBackground = React.memo(() => {
+    return (
+        <div className="w-full absolute inset-0 h-full">
+            <SparklesCore
+                id="tsparticleshero"
+                background="transparent"
+                minSize={0.6}
+                maxSize={1.4}
+                particleDensity={50}
+                className="w-full h-full"
+                particleColor="#FFFFFF"
+                speed={1}
+            />
+        </div>
+    )
+})
+SparklesBackground.displayName = 'SparklesBackground'
+
 export const HeroSection = () => {
     const [menuState, setMenuState] = React.useState(false)
     const [titleNumber, setTitleNumber] = useState(0)
     const titles = useMemo(
-        () => ["menarik", "modern", "profesional", "unik", "kreatif"],
+        () => ["murah", "cepat", "profesional", "berkualitas", "terpercaya"],
         []
     )
 
     useEffect(() => {
         const timeoutId = setTimeout(() => {
-            if (titleNumber === titles.length - 1) {
-                setTitleNumber(0)
-            } else {
-                setTitleNumber(titleNumber + 1)
-            }
+            setTitleNumber((prev) => {
+                if (prev === titles.length - 1) {
+                    return 0
+                } else {
+                    return prev + 1
+                }
+            })
         }, 2000)
         return () => clearTimeout(timeoutId)
-    }, [titleNumber, titles])
+    }, [titleNumber, titles.length])
 
     return (
         <div>
@@ -128,19 +149,8 @@ export const HeroSection = () => {
                 </div>
 
                 <section className="overflow-hidden bg-black relative">
-                    {/* Sparkles Background */}
-                    <div className="w-full absolute inset-0 h-full">
-                        <SparklesCore
-                            id="tsparticleshero"
-                            background="transparent"
-                            minSize={0.6}
-                            maxSize={1.4}
-                            particleDensity={50}
-                            className="w-full h-full"
-                            particleColor="#FFFFFF"
-                            speed={1}
-                        />
-                    </div>
+                    {/* Sparkles Background - Component terpisah agar tidak re-render */}
+                    <SparklesBackground />
                     
                     <div className="relative mx-auto max-w-5xl px-6 py-28 lg:py-24 z-10">
                         <div className="relative z-20 mx-auto max-w-2xl text-center">
@@ -158,14 +168,14 @@ export const HeroSection = () => {
                                 }}
                             >
                                 <h1 className="text-balance text-4xl font-semibold md:text-5xl lg:text-6xl flex flex-wrap items-center justify-center gap-2">
-                                    <span>Ingin Website yang</span>
+                                    <span>Joki Web</span>
                                     <span className="relative inline-block overflow-hidden text-center md:pb-4 md:pt-1 min-w-[200px] md:min-w-[300px] h-[1.2em]">
                                         {titles.map((title, index) => (
                                             <motion.span
-                                                key={index}
+                                                key={`title-${title}`}
                                                 className="absolute left-0 right-0 font-semibold"
-                                                initial={{ opacity: 0, y: "-100" }}
-                                                transition={{ type: "spring", stiffness: 50 }}
+                                                initial={{ opacity: 0, y: titleNumber > index ? -150 : 150 }}
+                                                transition={{ type: "spring", stiffness: 50, damping: 15 }}
                                                 animate={
                                                     titleNumber === index
                                                         ? {
@@ -182,16 +192,16 @@ export const HeroSection = () => {
                                             </motion.span>
                                         ))}
                                     </span>
-                                    <span>?</span>
+                                    <span>untuk Proyekmu</span>
                                 </h1>
-                                <p className="mx-auto my-8 max-w-2xl text-xl">Officiis laudantium excepturi ducimus rerum dignissimos, and tempora nam vitae, excepturi ducimus iste provident dolores.</p>
+                                <p className="mx-auto my-8 max-w-2xl text-xl">Layanan joki website murah dengan kualitas profesional. Kami siap membantu mengerjakan proyek website, aplikasi, atau tugas kuliahmu dengan harga terjangkau dan hasil memuaskan.</p>
 
                                 <div className="flex items-center justify-center gap-4 flex-wrap">
                                     <Button
                                         asChild
                                         size="lg">
-                                        <Link href="#">
-                                            <span className="btn-label">Start Building</span>
+                                        <Link href="#order">
+                                            <span className="btn-label">Pesan Sekarang</span>
                                         </Link>
                                     </Button>
                                     <Button
@@ -241,7 +251,7 @@ export const HeroSection = () => {
                 </section>
                 <section className="bg-black relative z-10 py-16">
                     <div className="m-auto max-w-5xl px-6">
-                        <h2 className="text-center text-lg font-medium">Your favorite companies are our partners.</h2>
+                        <h2 className="text-center text-lg font-medium">Layanan Joki Web Terpercaya untuk Berbagai Kebutuhan</h2>
                         <div className="mx-auto mt-20 flex max-w-4xl flex-wrap items-center justify-center gap-x-12 gap-y-8 sm:gap-x-16 sm:gap-y-12">
                             <Image
                                 className="h-5 w-fit invert opacity-70 hover:opacity-100 transition-opacity"
